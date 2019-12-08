@@ -1,0 +1,15 @@
+Package: TTDice
+Type: Package
+Title: Dice Simulator for multile dice types for board games
+Version: 0.1.0
+Author: Dustin Duffy
+Maintainer: Dustin Duffy <dduffy@ufl.edu>
+Description: Simulates dice rolls for different types of sided dice that are commonly used in board games. Supports 20, 12, 10, 8, 6, and 4 sided dice.
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+RoxygenNote: 6.1.1

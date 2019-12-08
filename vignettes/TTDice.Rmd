@@ -1,0 +1,113 @@
+---
+title: "TTDice"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{TTDice}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+Author: Dustin Duffy
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(TTDice)
+```
+TTDice: A package for simulating different types of dice for table top games
+
+Introduction
+Tabletop games that involve dice are a fairly common stable of the board gaming world. In the new age of technology, being able to play games with your friends is possible without physically being in the same room. But, what if the desire to play board games is challenged by the inability to be in the same room as your friends? Websites have random number generators for dice, but what if your game has multiple different kinds of dice with different values that are needed, like the classic Dungeons and Dragons game? With DNDice, the ability to generate the 7 different kinds of dice is as easy as typing in DiceRoll and the type of dice you want to simulate. The types of dice that are included are:
+
+ICOSAHEDRON - The 20 sided dice with values from 1 - 20. This is chosen by "D20".
+
+
+DODECAHEDRON -  The 12 sided dice with values from 1 - 12. This is chosen by "D12".
+
+
+PENTAGONAL TRAPEZOHEDRON - Both types of the 10 sided dice are covered in this package simply by choosing either "D10_10" for the 10 sided dice that takes values of 00 - 90 by multiples of 10, or "D10_1" that takes values of 0 - 9.
+
+
+OCTAHEDRON - The 8 sided dice with values from 1 - 8. This is chosen by "D8"
+
+
+CUBE - The traditional 6 sided dice from 1- 6. This is chosen by "D6"
+
+TETRAHEDRON - The 4 sided dice that has unique values on each side of either 1 2 3, 1 2 4, 1 3 4, or 2 3 4. This is chosen by "D4"
+
+This odd combination of dice could prove challenging to find on a simulator and would be hard to share with your friends. With this package a simple screen share could show the dice rolls without the dice ever actually having to be rolled by the player - and all the options required for the game are available.
+
+The first step of this project was to write the function that would give us the proper rolls of each kind of dice
+
+```{r}
+###code for the DNDice package
+DiceRoll <- function(m) {if(m=='D4'){
+  return(sample(c(123, 124, 134, 234), 1, replace=TRUE)) #Sampling of the 4 combinations for Tetrahedron
+} else {
+  if(m =='D6'){
+    return(sample(1:6, 1, replace=TRUE)) #Sampling of the 6 combinations of a normal die
+  } else {
+    if(m =='D8'){
+      return(sample(1:8, 1, replace=TRUE)) #Sampling of the 8 combinations of the 
+    }
+    else {
+      if(m =='D10_1'){
+        return(sample(0:9, 1, replace=TRUE)) #Sampling of the 10 combinations of the 10 sided dice with values of 0 - 9
+      }
+      else {
+        if(m =='D10_10'){
+          return(sample(c(00, 10, 20, 30, 40, 50, 60, 70, 80, 90), 1, replace=TRUE)) #Sampling of the 10 sided dice of the combinations 00 - 90 by 10. This had to be made a little differently than the others due to it not being sequential
+        }
+        else {
+          if(m =='D12'){
+            return(sample(1:12, 1, replace=TRUE)) #Sampling of the 12 sided die
+          }
+          else {
+            if(m =='D20'){
+              return(sample(1:20, 1, replace=TRUE)) #Sampling of the 20 sided die
+            }
+          }
+        }
+      }
+
+    }
+  }
+}
+}
+```
+
+A test of  will show if they work properly
+
+
+
+
+```{r}
+
+
+DiceRoll("D10_1")
+
+DiceRoll("D10_10")
+
+DiceRoll("D12")
+
+DiceRoll("D20")
+```
+
+
+Github
+
+My package is installed on github and can be downloaded using the command:
+
+
+install_github("dduffyUF/TTDice")
+
+Conclusions
+
+This package successfully simulates the multiple types of dice needed for a standard Dungeons and Dragons type game, as well as any other game that would require one or more of these specific die in these ranges. This would make gaming possible over a single screen share where the roller would be entering the values for the participants as needed. It would prevent any kind of cheating by players if they were rolling without any kind of supervision. 
+
+Future Work
+
+Ideally, the ability to roll multiple dice at once would be a logical next step for this package to handle combinations of dice rolls that are sometimes necessary in some games. Additional types of dice can easily be added depending on what the certain type of game requires. 
